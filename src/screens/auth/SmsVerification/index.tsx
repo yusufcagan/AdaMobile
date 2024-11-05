@@ -16,8 +16,8 @@ function SmsVerification({
   const [otp, setOtp] = useState<string>('');
   const [secretCode, setSecretCode] = useState<string>(secret);
   const [isError, setIsError] = useState(false);
-  const [timer, setTimer] = useState(40); // Başlangıçta 40 saniye
-  const [isResendVisible, setIsResendVisible] = useState(false); // "Kodu Tekrar Gönder" için durum
+  const [timer, setTimer] = useState(40);
+  const [isResendVisible, setIsResendVisible] = useState(false);
 
   const handleOtpChange = async (text: string) => {
     setOtp(text);
