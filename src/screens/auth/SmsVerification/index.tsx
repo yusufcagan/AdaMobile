@@ -7,6 +7,7 @@ import {OtpInput} from 'react-native-otp-entry';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {AuthStackParamList} from '../../../../RootStackParamList';
 import {verifySmsCode, sendSmsCode} from '../../../services/authServies';
+import useAuthStore from '../../../store/authStore';
 
 function SmsVerification({
   route,
@@ -27,6 +28,7 @@ function SmsVerification({
       try {
         const response = await verifySmsCode(text, secret);
         console.log(response);
+        useAuthStore.getState().setToken(response.access_token);
       } catch (error) {
         console.log('Doğrulama başarısız', error);
         setIsError(true);
