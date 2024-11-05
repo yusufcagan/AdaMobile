@@ -1,6 +1,5 @@
 import {StyleSheet} from 'react-native';
 import Color from '../../../assets/theme/Color';
-import {Login} from 'iconsax-react-native';
 
 export const styles = StyleSheet.create({
   flex: {
@@ -41,6 +40,12 @@ export const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 10,
     alignItems: 'center',
+    marginTop: 10,
+  },
+  errorText: {
+    color: Color.Red,
+    fontSize: 14,
+    fontWeight: '500',
     marginTop: 10,
   },
   loginText: {

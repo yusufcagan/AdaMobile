@@ -2,31 +2,48 @@ import React, {useState} from 'react';
 import {
   Text,
   TextInput,
-  Button,
   Alert,
   SafeAreaView,
   TouchableOpacity,
   View,
+  ActivityIndicator,
 } from 'react-native';
 import {styles} from './styles';
-import {ArrowLeft2, Vibe} from 'iconsax-react-native';
+import {ArrowLeft2} from 'iconsax-react-native';
 import Color from '../../../assets/theme/Color';
+import {sendSmsCode} from '../../../services/authServies';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {AuthStackParamList} from '../../../../RootStackParamList';
 
-function Login() {
+function Login({
+  navigation,
+}: NativeStackScreenProps<AuthStackParamList, 'Login'>) {
   const [tcKimlikNo, setTcKimlikNo] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleTcKimlikInput = (text: string) => {
-    // Sadece rakam girişini kabul eder
     if (/^\d*$/.test(text)) {
       setTcKimlikNo(text);
+      setErrorMessage(''); // Her girişte hatayı sıfırla
     }
   };
 
-  const validateTcKimlikNo = () => {
-    if (tcKimlikNo.length === 11) {
-      Alert.alert('Başarılı', 'TC Kimlik Numarası geçerli!');
-    } else {
-      Alert.alert('Hata', 'TC Kimlik Numarası 11 haneli olmalıdır.');
+  const handleSms = async () => {
+    if (tcKimlikNo.length !== 11) {
+      setErrorMessage('TC Kimlik Numarası mutlaka 11 karakterli olmalıdır.');
+      return;
+    }
+
+    setIsLoading(true);
+    try {
+      const response = await sendSmsCode(tcKimlikNo);
+      const secret = response.secret;
+      navigation.navigate('SmsVerification', {secret});
+    } catch (error) {
+      setErrorMessage('Seçili TC Kimlik Numarası geçersiz.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -44,8 +61,13 @@ function Login() {
         maxLength={11}
         placeholder="TC Kimlik No Giriniz"
       />
-      <TouchableOpacity style={styles.loginButton}>
-        <Text style={styles.loginText}>Giriş yap</Text>
+      {errorMessage && <Text style={styles.errorText}>{errorMessage}</Text>}
+      <TouchableOpacity onPress={handleSms} style={styles.loginButton}>
+        {isLoading ? (
+          <ActivityIndicator size="small" color={Color.White} />
+        ) : (
+          <Text style={styles.loginText}>Giriş yap</Text>
+        )}
       </TouchableOpacity>
       <View style={styles.flex} />
       <Text style={styles.footerText}>
@@ -59,4 +81,5 @@ function Login() {
     </SafeAreaView>
   );
 }
+
 export default Login;
