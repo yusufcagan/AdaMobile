@@ -13,4 +13,5 @@ export default {
   Orange: '#E08B4E',
   Purple: '#8E44AD',
   Red: '#FF0000',
+  FocusedGray: '#3b3a3a',
 };
