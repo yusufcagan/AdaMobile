@@ -9,6 +9,7 @@ export default {
   LightGray: '#e8e6e6',
   Blue: '#4A9EB8',
   DarkBlue: '#1d438c',
+  lightBlue: '#365591',
   Orange: '#E08B4E',
   Purple: '#8E44AD',
   Red: '#FF0000',
