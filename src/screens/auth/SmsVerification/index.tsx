@@ -25,8 +25,8 @@ function SmsVerification({
     if (text.length === 4) {
       setIsError(false);
       try {
-        await verifySmsCode(text, secret);
-        console.log('Doğrulama başarılı');
+        const response = await verifySmsCode(text, secret);
+        console.log(response);
       } catch (error) {
         console.log('Doğrulama başarısız', error);
         setIsError(true);
