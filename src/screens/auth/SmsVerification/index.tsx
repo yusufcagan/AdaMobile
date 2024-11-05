@@ -12,12 +12,12 @@ function SmsVerification({
   route,
   navigation,
 }: NativeStackScreenProps<AuthStackParamList, 'SmsVerification'>) {
+  const {secret, identity} = route.params;
   const [otp, setOtp] = useState<string>('');
+  const [secretCode, setSecretCode] = useState<string>(secret);
   const [isError, setIsError] = useState(false);
   const [timer, setTimer] = useState(40); // Başlangıçta 40 saniye
   const [isResendVisible, setIsResendVisible] = useState(false); // "Kodu Tekrar Gönder" için durum
-
-  const {secret} = route.params;
 
   const handleOtpChange = async (text: string) => {
     setOtp(text);
@@ -36,10 +36,10 @@ function SmsVerification({
 
   const handleResendCode = async () => {
     try {
-      // Kodu tekrar gönderme isteği
-      //   await sendSmsCode(route.params.tcKimlikNo);
-      setTimer(40); // 40 saniyelik sayacı yeniden başlat
-      setIsResendVisible(false); // "Kodu Tekrar Gönder" butonunu gizle
+      setTimer(40);
+      setIsResendVisible(false);
+      const response = await sendSmsCode(identity);
+      setSecretCode(response.secret);
     } catch (error) {
       Alert.alert('Hata', 'Kod tekrar gönderilemedi.');
     }

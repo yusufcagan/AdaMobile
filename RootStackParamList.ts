@@ -1,4 +1,4 @@
 export type AuthStackParamList = {
   Login: undefined;
-  SmsVerification: {secret: string};
+  SmsVerification: {secret: string; identity: string};
 };

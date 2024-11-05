@@ -18,28 +18,28 @@ import {AuthStackParamList} from '../../../../RootStackParamList';
 function Login({
   navigation,
 }: NativeStackScreenProps<AuthStackParamList, 'Login'>) {
-  const [tcKimlikNo, setTcKimlikNo] = useState('');
+  const [identity, setIdentity] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleTcKimlikInput = (text: string) => {
     if (/^\d*$/.test(text)) {
-      setTcKimlikNo(text);
-      setErrorMessage(''); // Her girişte hatayı sıfırla
+      setIdentity(text);
+      setErrorMessage('');
     }
   };
 
   const handleSms = async () => {
-    if (tcKimlikNo.length !== 11) {
+    if (identity.length !== 11) {
       setErrorMessage('TC Kimlik Numarası mutlaka 11 karakterli olmalıdır.');
       return;
     }
 
     setIsLoading(true);
     try {
-      const response = await sendSmsCode(tcKimlikNo);
+      const response = await sendSmsCode(identity);
       const secret = response.secret;
-      navigation.navigate('SmsVerification', {secret});
+      navigation.navigate('SmsVerification', {secret, identity});
     } catch (error) {
       setErrorMessage('Seçili TC Kimlik Numarası geçersiz.');
     } finally {
@@ -55,7 +55,7 @@ function Login({
       <Text style={styles.title}>Hoş geldiniz! Sizi tekrar görmek harika.</Text>
       <TextInput
         style={styles.input}
-        value={tcKimlikNo}
+        value={identity}
         onChangeText={handleTcKimlikInput}
         keyboardType="numeric"
         maxLength={11}
