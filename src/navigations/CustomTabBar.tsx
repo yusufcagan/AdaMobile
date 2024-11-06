@@ -8,14 +8,13 @@ const CustomTabBar = ({state, descriptors, navigation}: any) => {
   const labels: {[key: string]: string} = {
     HomeScreen: 'Anasayfa',
     TransactionScreen: 'İşlemler',
-    QrGenerationScreen: '', // No label for QR button
+    QrGenerationScreen: '',
     NotificationScreen: 'Bildirimler',
     AccountScreen: 'Hesap',
   };
 
   return (
     <View style={styles.container}>
-      {/* Left Side Tabs */}
       <View style={[styles.sideContainer, styles.leftContainer]}>
         {state.routes.slice(0, 2).map((route: any, index: any) => {
           const {options} = descriptors[route.key];
@@ -61,7 +60,6 @@ const CustomTabBar = ({state, descriptors, navigation}: any) => {
         })}
       </View>
 
-      {/* Center QR Button */}
       <View style={styles.qrButtonContainer}>
         <TouchableOpacity
           style={styles.qrButton}
@@ -70,7 +68,6 @@ const CustomTabBar = ({state, descriptors, navigation}: any) => {
         </TouchableOpacity>
       </View>
 
-      {/* Right Side Tabs */}
       <View style={[styles.sideContainer, styles.rightContainer]}>
         {state.routes.slice(3).map((route: any, index: any) => {
           const {options} = descriptors[route.key];
