@@ -3,7 +3,7 @@ import useAuthStore from '../store/authStore';
 
 const API_BASE_URL = 'https://api.adalikart.com';
 
-export const getTrasaction = async () => {
+export const getTrasaction = async (page?: number, perPage?: number) => {
   const token = useAuthStore.getState().token;
   try {
     const response = await axios.get(
@@ -13,6 +13,10 @@ export const getTrasaction = async () => {
           'Content-Type': 'application/json',
           'X-Requested-With': 'XMLHttpRequest',
           Authorization: `Bearer ${token}`,
+        },
+        params: {
+          ...(page !== undefined && {page}),
+          ...(perPage !== undefined && {perPage}),
         },
       },
     );

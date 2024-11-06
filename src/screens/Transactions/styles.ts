@@ -4,6 +4,7 @@ import Color from '../../assets/theme/Color';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: Color.OffWhite,
   },
   head: {
     padding: 20,
@@ -29,6 +30,7 @@ export const styles = StyleSheet.create({
     alignSelf: 'center',
     marginVertical: 10,
     padding: 12,
+    borderRadius: 5,
     shadowColor: Color.Gray,
     shadowOffset: {
       width: 0,

@@ -60,4 +60,36 @@ export const styles = StyleSheet.create({
     marginTop: 20,
     justifyContent: 'space-between',
   },
+  card: {
+    width: '100%',
+    backgroundColor: Color.White,
+    alignSelf: 'center',
+    marginVertical: 10,
+    padding: 12,
+    borderRadius: 5,
+    shadowColor: Color.Gray,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  cardFlex: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 5,
+  },
+  unitText: {
+    color: Color.Black,
+    fontSize: 13,
+    fontWeight: '400',
+  },
+  historyText: {
+    color: Color.Gray,
+    fontSize: 12,
+    fontWeight: '400',
+  },
 });

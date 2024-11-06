@@ -19,7 +19,7 @@ export default function TransactionScreen() {
   const fetchTransactionHistory = async () => {
     try {
       const response = await getTrasaction();
-      setTransactions(response.data.items); // `items` altındaki verileri kullanıyoruz
+      setTransactions(response.data.items);
     } catch (error) {
       Alert.alert('Hata', 'İşlem geçmişi alınamadı.');
       console.error(error);
