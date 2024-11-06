@@ -4,6 +4,7 @@ import Color from '../../assets/theme/Color';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: Color.OffWhite,
   },
   sum: {
     backgroundColor: Color.DarkBlue,
@@ -53,5 +54,10 @@ export const styles = StyleSheet.create({
   textCenter: {
     textAlign: 'center',
     marginTop: 5,
+  },
+  fastMenu: {
+    flexDirection: 'row',
+    marginTop: 20,
+    justifyContent: 'space-between',
   },
 });

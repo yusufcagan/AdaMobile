@@ -7,6 +7,7 @@ import Header from '../../components/Header';
 import {styles} from './styles';
 import {Card, Wallet2} from 'iconsax-react-native';
 import {balances, getMe} from '../../services/authServies';
+import Color from '../../assets/theme/Color';
 
 function HomeScreen({
   navigation,
@@ -47,7 +48,6 @@ function HomeScreen({
         <Text style={styles.helloText}>Hoş Geldiniz</Text>
         <Text style={styles.name}>{user?.nameSurname}</Text>
         <Text style={styles.title}>Hesap özetiniz</Text>
-        {/* <View style={styles.slider}></View> */}
         <FlatList
           data={balance}
           horizontal
@@ -64,25 +64,23 @@ function HomeScreen({
           )}
         />
         <Text style={styles.title}>Hızlı İşlemler</Text>
-        <View
-          style={{
-            flexDirection: 'row',
-            marginTop: 20,
-            justifyContent: 'space-between',
-          }}>
+        <View style={styles.fastMenu}>
           <TouchableOpacity style={styles.button}>
-            <Card size="20" color="#ffffff" />
+            <Card size="20" color={Color.White} />
             <Text style={[styles.helloText, styles.textCenter]}>
               Üye İş Yeri Listesi
             </Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}>
-            <Wallet2 size="20" color="#ffffff" />
+            <Wallet2 size="20" color={Color.White} />
             <Text style={[styles.helloText, styles.textCenter]}>
               Etkinlik ve Biletlerim
             </Text>
           </TouchableOpacity>
         </View>
+      </View>
+      <View style={{padding: 15}}>
+        <Text>Etkinlikler</Text>
       </View>
     </SafeAreaView>
   );
