@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import {
   View,
   Text,
@@ -9,12 +9,14 @@ import {
 } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 import {generateQr} from '../../services/generateServices';
+import {useFocusEffect} from '@react-navigation/native';
 import {styles} from './styles';
 
 function QRGeneratorScreen() {
   const [qrCode, setQrCode] = useState('');
   const [timeLeft, setTimeLeft] = useState(30);
   const [isModalVisible, setModalVisible] = useState(false);
+  const [isTimerActive, setIsTimerActive] = useState(false);
 
   const fetchNewQrCode = async () => {
     try {
@@ -26,18 +28,26 @@ function QRGeneratorScreen() {
     }
   };
 
-  useEffect(() => {
-    fetchNewQrCode();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      fetchNewQrCode();
+      setIsTimerActive(true);
+
+      return () => {
+        setIsTimerActive(false);
+        setQrCode('');
+      };
+    }, []),
+  );
 
   useEffect(() => {
-    if (timeLeft > 0) {
+    if (isTimerActive && timeLeft > 0) {
       const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
       return () => clearTimeout(timer);
-    } else {
+    } else if (timeLeft === 0) {
       setModalVisible(true);
     }
-  }, [timeLeft]);
+  }, [timeLeft, isTimerActive]);
 
   const regenerateQRCode = () => {
     fetchNewQrCode();
