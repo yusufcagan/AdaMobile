@@ -21,4 +21,15 @@ export const styles = StyleSheet.create({
     color: Color.White,
     fontSize: 20,
   },
+  button: {
+    backgroundColor: Color.White,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    alignSelf: 'center',
+    padding: 15,
+    width: '90%',
+    marginTop: 20,
+    borderRadius: 10,
+  },
 });

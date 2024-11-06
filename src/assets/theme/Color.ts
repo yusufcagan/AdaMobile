@@ -2,7 +2,7 @@ export default {
   Black: '#161616',
   Text: '#242732',
   White: '#FFFFFF',
-  OffWhite: '#d1d1d1',
+  OffWhite: '#dedede',
   Line: '#E5ECEC',
   Gray: '#C4C4C4',
   DarkGray: '#7D7D7D',
