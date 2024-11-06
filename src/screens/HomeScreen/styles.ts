@@ -27,9 +27,20 @@ export const styles = StyleSheet.create({
   slider: {
     backgroundColor: Color.White,
     height: 150,
-    width: '90%',
+    width: 320,
     borderRadius: 10,
     margin: 15,
+    justifyContent: 'space-between',
+    padding: 20,
+  },
+  sliderName: {
+    fontSize: 16,
+    color: Color.Black,
+  },
+  sliderUnit: {
+    fontSize: 20,
+    color: Color.DarkBlue,
+    fontWeight: '800',
   },
   button: {
     backgroundColor: Color.lightBlue,

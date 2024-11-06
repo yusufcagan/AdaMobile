@@ -57,3 +57,24 @@ export const getMe = async () => {
     throw error;
   }
 };
+
+export const balances = async () => {
+  const token = useAuthStore.getState().token;
+  try {
+    const response = await axios.post(
+      `${API_BASE_URL}/citizen/balances`,
+      null,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest',
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+    return response.data;
+  } catch (error) {
+    console.error('hataa:', error);
+    throw error;
+  }
+};

@@ -1,4 +1,4 @@
-import {View, Text, Touchable, TouchableOpacity} from 'react-native';
+import {View, Text, Touchable, TouchableOpacity, FlatList} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {HomeStackParamList} from '../../../RootStackParamList';
@@ -6,12 +6,13 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import Header from '../../components/Header';
 import {styles} from './styles';
 import {Card, Wallet2} from 'iconsax-react-native';
-import {getMe} from '../../services/authServies';
+import {balances, getMe} from '../../services/authServies';
 
 function HomeScreen({
   navigation,
 }: NativeStackScreenProps<HomeStackParamList, 'HomeScreen'>) {
   const [user, setUser] = useState<{nameSurname: string} | null>(null);
+  const [balance, setBalance] = useState(null);
 
   useEffect(() => {
     const fetchUserMe = async () => {
@@ -25,6 +26,20 @@ function HomeScreen({
 
     fetchUserMe();
   }, []);
+
+  useEffect(() => {
+    const fetchBalance = async () => {
+      try {
+        const response = await balances();
+        setBalance(response.balances);
+      } catch (error) {
+        console.error('Bakiye bilgisi alınamadı:', error);
+      }
+    };
+
+    fetchBalance();
+  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <Header />
@@ -32,7 +47,22 @@ function HomeScreen({
         <Text style={styles.helloText}>Hoş Geldiniz</Text>
         <Text style={styles.name}>{user?.nameSurname}</Text>
         <Text style={styles.title}>Hesap özetiniz</Text>
-        <View style={styles.slider}></View>
+        {/* <View style={styles.slider}></View> */}
+        <FlatList
+          data={balance}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{paddingHorizontal: 10}}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({item}) => (
+            <View style={styles.slider}>
+              <Text style={styles.sliderName}>{item.title}</Text>
+              <Text style={styles.sliderUnit}>
+                {item.balance} {item.unit}
+              </Text>
+            </View>
+          )}
+        />
         <Text style={styles.title}>Hızlı İşlemler</Text>
         <View
           style={{
