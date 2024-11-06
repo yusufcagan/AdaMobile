@@ -24,6 +24,7 @@ export const styles = StyleSheet.create({
     color: Color.White,
     fontSize: 16,
     marginTop: 20,
+    marginBottom: 10,
   },
   slider: {
     backgroundColor: Color.White,

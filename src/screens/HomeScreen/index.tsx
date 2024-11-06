@@ -17,6 +17,7 @@ import {Card, Wallet2} from 'iconsax-react-native';
 import {balances, getMe} from '../../services/authServies';
 import Color from '../../assets/theme/Color';
 import {getTrasaction} from '../../services/transactionServices';
+import Slider from '../../components/Slider';
 
 export interface TransactionProps {
   value: number;
@@ -82,21 +83,7 @@ function HomeScreen({
           <Text style={styles.helloText}>Hoş Geldiniz</Text>
           <Text style={styles.name}>{user?.nameSurname}</Text>
           <Text style={styles.title}>Hesap özetiniz</Text>
-          <FlatList
-            data={balance}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{paddingHorizontal: 10}}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({item}) => (
-              <View style={styles.slider}>
-                <Text style={styles.sliderName}>{item.title}</Text>
-                <Text style={styles.sliderUnit}>
-                  {item.balance} {item.unit}
-                </Text>
-              </View>
-            )}
-          />
+          <Slider data={balance || []} />
           <Text style={styles.title}>Hızlı İşlemler</Text>
           <View style={styles.fastMenu}>
             <TouchableOpacity style={styles.button}>
