@@ -60,6 +60,13 @@ export const styles = StyleSheet.create({
     marginTop: 20,
     justifyContent: 'space-between',
   },
+  activityCard: {
+    backgroundColor: Color.White,
+    height: 80,
+    marginBottom: 10,
+    borderRadius: 5,
+    marginVertical: 5,
+  },
   card: {
     width: '100%',
     backgroundColor: Color.White,

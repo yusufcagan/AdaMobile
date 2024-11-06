@@ -115,7 +115,7 @@ function HomeScreen({
         </View>
         <View style={{padding: 15}}>
           <Text>Etkinlikler</Text>
-          <View></View>
+          <View style={styles.activityCard} />
           <Text>En son işlemler</Text>
           <FlatList
             data={transactions}
