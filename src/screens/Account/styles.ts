@@ -12,6 +12,7 @@ export const styles = StyleSheet.create({
     borderBottomLeftRadius: 15,
     borderBottomRightRadius: 15,
     paddingBottom: 30,
+    marginBottom: 10,
   },
   helloText: {
     color: Color.White,
@@ -29,7 +30,7 @@ export const styles = StyleSheet.create({
     alignSelf: 'center',
     padding: 15,
     width: '90%',
-    marginTop: 20,
+    marginTop: 10,
     borderRadius: 10,
   },
 });

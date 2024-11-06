@@ -64,7 +64,7 @@ export const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: Color.White,
     alignSelf: 'center',
-    marginVertical: 10,
+    marginVertical: 4,
     padding: 12,
     borderRadius: 5,
     shadowColor: Color.Gray,
