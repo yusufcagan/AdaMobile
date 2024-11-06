@@ -12,8 +12,13 @@ import Header from '../../components/Header';
 import {ArrowLeft2} from 'iconsax-react-native';
 import Color from '../../assets/theme/Color';
 import {getTrasaction} from '../../services/transactionServices';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {HomeStackParamList} from '../../../RootStackParamList';
+import {TransactionProps} from '../HomeScreen';
 
-export default function TransactionScreen() {
+export default function TransactionScreen({
+  navigation,
+}: NativeStackScreenProps<HomeStackParamList, 'TransactionScreen'>) {
   const [transactions, setTransactions] = useState([]);
 
   const fetchTransactionHistory = async () => {
@@ -30,8 +35,10 @@ export default function TransactionScreen() {
     fetchTransactionHistory();
   }, []);
 
-  const renderTransactionItem = ({item}: any) => (
-    <TouchableOpacity style={styles.card}>
+  const renderTransactionItem = ({item}: {item: TransactionProps}) => (
+    <TouchableOpacity
+      style={styles.card}
+      onPress={() => navigation.navigate('TransactionDetail', {item})}>
       <View style={styles.cardFlex}>
         <Text style={styles.unitText}>
           {item.enumTitle ? item.enumTitle : 'Tutar İndirimi'}

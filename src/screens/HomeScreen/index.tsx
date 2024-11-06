@@ -18,18 +18,16 @@ import {balances, getMe} from '../../services/authServies';
 import Color from '../../assets/theme/Color';
 import {getTrasaction} from '../../services/transactionServices';
 
-interface TransactionProps {
-  item: {
-    value: number;
-    unitTitle: string;
-    date: string;
-    fullDate: string;
-    businessName: string;
-    unit: string;
-    enumTitle: string;
-    direction: string;
-    usagePrettyLabel: string;
-  };
+export interface TransactionProps {
+  value: number;
+  unitTitle: string;
+  date: string;
+  fullDate: string;
+  businessName: string;
+  unit: string;
+  enumTitle: string;
+  direction: string;
+  usagePrettyLabel: string;
 }
 function HomeScreen({
   navigation,
@@ -56,8 +54,10 @@ function HomeScreen({
     fetchData();
   }, []);
 
-  const renderTransactionItem = ({item}: TransactionProps) => (
-    <TouchableOpacity style={styles.card}>
+  const renderTransactionItem = ({item}: {item: TransactionProps}) => (
+    <TouchableOpacity
+      style={styles.card}
+      onPress={() => navigation.navigate('TransactionDetail', {item})}>
       <View style={styles.cardFlex}>
         <Text style={styles.unitText}>
           {item.enumTitle ? item.enumTitle : 'Tutar İndirimi'}
